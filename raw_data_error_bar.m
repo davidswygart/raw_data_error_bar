@@ -5,14 +5,25 @@ arguments
     opts.bar_funcs = {@mean, @std}
     opts.jitter_scale = 0.9
     opts.cap_width = 40
+    opts.bar_color
 end
 x_cat = categorical(x);
 x_cat = reordercats(x_cat,x);
+
+vectorize = @(y) y(:);
+y = cellfun(vectorize, y, 'UniformOutput', false);
 
 avg = cellfun(opts.bar_funcs{1}, y);
 err = cellfun(opts.bar_funcs{2}, y);
 hold on
 b = bar(x_cat, avg, 'FaceColor','flat');
+
+if isfield(opts, "bar_color")
+    for k = 1:length(x_cat)
+        b.CData(k, :) = opts.bar_color{k};
+    end
+end
+
 errorbar(x_cat, avg, err, 'k', 'LineStyle', 'none', 'CapSize',opts.cap_width,'LineWidth',2)
 
 alpha = 0.8;
