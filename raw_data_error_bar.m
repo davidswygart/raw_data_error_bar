@@ -3,7 +3,7 @@ arguments
     x string
     y cell
     opts.bar_funcs = {@mean, @std}
-    opts.jitter_scale = 0.9
+    opts.jitter_scale = 0.6
     opts.cap_width = 40
     opts.bar_color
 end
@@ -26,7 +26,7 @@ end
 
 errorbar(x_cat, avg, err, 'k', 'LineStyle', 'none', 'CapSize',opts.cap_width,'LineWidth',2)
 
-alpha = 0.8;
+alpha = .95;
 jitterWidth = opts.jitter_scale*b.BarWidth;
 
 for i = 1:length(x)
@@ -38,8 +38,8 @@ for i = 1:length(x)
 
     bar_x = repmat(i, size(y{i})) + x_shift;
 
-    s = scatter(bar_x, y{i}, 'filled', 'k');
-    s.AlphaData = alpha * ones(size(y{i}));
-    s.MarkerFaceAlpha = 'flat';
+    s = scatter(bar_x, y{i}, 10, 'filled', 'k');
+    % s.AlphaData = alpha * ones(size(y{i}));
+    % s.MarkerFaceAlpha = 'flat';
 end
 end
