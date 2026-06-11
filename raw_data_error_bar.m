@@ -2,7 +2,7 @@ function b = raw_data_error_bar(x,y, opts)
 arguments
     x string
     y cell
-    opts.bar_funcs = {@mean, @std}
+    opts.bar_funcs = {@nan_mean, @nan_sem}
     opts.jitter_scale = 0.6
     opts.cap_width = 40
     opts.bar_color
